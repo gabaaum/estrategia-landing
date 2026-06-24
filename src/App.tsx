@@ -416,9 +416,8 @@ function IncludedSection() {
         <h2>Tudo o que está incluído no seu acesso</h2>
       </div>
       <div className="included-list">
-        {included.map((item, index) => (
+        {included.map((item) => (
           <article key={item.title}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
             <div>
               <h3>{item.title}</h3>
               {item.text ? <p>{item.text}</p> : null}

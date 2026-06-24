@@ -817,8 +817,8 @@ blockquote {
 
 .included-list article {
   display: grid;
-  grid-template-columns: 90px minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
   padding: 28px 0;
   border-bottom: 1px solid var(--line-dark);
 }
