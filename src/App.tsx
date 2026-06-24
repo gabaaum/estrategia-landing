@@ -196,30 +196,38 @@ function StorySection() {
         <p className="eyebrow">A história por trás do método</p>
         <h2>A trajetória de Rebeca Geller</h2>
         <p>
-          Durante seis anos nos bastidores do mercado digital, Rebeca atuou como
-          coprodutora e participou da estruturação de mais de 200 funis de
-          vendas em mais de 50 nichos e especialidades.
+          Rebeca Geller trabalhou nos bastidores como Coprodutora de
+          infoprodutos por 6 anos e liderou a estruturação de mais de 200 funis
+          de venda para especialistas dos mais diversos mercados, como doutores,
+          advogados, nutricionistas, consultores e professores.
         </p>
         <p>
-          Ao lado de especialistas de áreas diferentes, ela acompanhou a criação
-          de ofertas, páginas, mensagens, aulas, criativos, validações e
-          decisões comerciais que determinavam se uma ideia ficaria parada ou
-          ganharia mercado.
+          Cada cliente tinha um conhecimento único e enfrentava desafios
+          diferentes. Analisando os dados de mais de 50 nichos, Rebeca descobriu
+          um padrão claro. Quem saía do operacional e escalava com
+          previsibilidade não era necessariamente o mais talentoso ou o que tinha
+          mais seguidores. Era quem seguia um processo rigoroso de estruturação,
+          validação e escala.
+        </p>
+        <p>
+          O grande desafio sempre foi o custo. Um processo de coprodução
+          individual exige um investimento de dezenas de milhares de reais. Isso
+          tornava o processo inacessível para quem está começando.
+        </p>
+        <p>
+          Sabendo disso, Rebeca tomou uma decisão estratégica: ela codificou toda
+          a lógica, os frameworks de copy e a inteligência de negócios dessa
+          metodologia de 200+ funis e os integrou a uma plataforma guiada por
+          Inteligência Artificial.
         </p>
         <blockquote>
           Não se trata de uma IA genérica que gera textos superficiais.
         </blockquote>
         <p>
-          O padrão encontrado foi claro: antes de escalar, contratar equipe ou
-          investir pesado, era preciso estruturar o conhecimento, validar a
-          promessa e transformar a experiência do especialista em uma oferta
-          compreensível.
-        </p>
-        <p>
-          A coprodução sempre entregou esse processo, mas com um custo alto e
-          uma barreira de entrada para quem ainda estava começando. O EstratégIA
-          nasce da codificação dessa metodologia em frameworks, inteligência de
-          negócios e uma jornada guiada dentro de uma plataforma de IA.
+          O EstratégIA nasceu justamente dessa transformação. Não se trata de
+          uma IA genérica que gera textos superficiais; é o método exato da
+          Rebeca, programado para extrair a sua expertise, organizar as suas
+          ideias e estruturar o seu primeiro infoproduto.
         </p>
         <div className="story-metrics">
           {metrics.map((item) => (
@@ -241,10 +249,17 @@ function PhilosophySection() {
         <p className="eyebrow">Filosofia</p>
         <h2>A filosofia: primeiro valide, depois escale</h2>
         <p>
-          O EstratégIA parte de uma premissa simples: produto digital não começa
-          pela gravação de aulas, começa por clareza estratégica. Primeiro você
-          transforma conhecimento em estrutura. Depois testa a oferta no mundo
-          real. Só então faz sentido aumentar investimento, equipe e escala.
+          Um dos erros mais comuns de quem está entrando no mercado digital é
+          tentar construir estruturas gigantescas antes mesmo de validar. Passam
+          meses consumindo teoria, contratando ferramentas caras ou planejando
+          lançamentos complexos sem sequer terem colocado um produto no mercado.
+        </p>
+        <p>
+          Nós acreditamos em um caminho mais inteligente:
+        </p>
+        <p>
+          O EstratégIA foi desenhado especificamente para fazer você atravessar a
+          fase de validação com segurança e velocidade.
         </p>
       </div>
       <div className="philosophy-grid">
@@ -270,16 +285,18 @@ function ProductSection() {
       <div className="product-grid">
         <div>
           <p>
-            O EstratégIA é uma plataforma de implementação de quatro meses que
-            conduz especialistas pela criação do primeiro infoproduto, reunindo
-            a metodologia de Rebeca Geller, análise das respostas, organização
-            das ideias, geração dos materiais e orientação de cada etapa.
+            O EstratégIA é uma plataforma de implementação de 4 meses para
+            especialistas que desejam criar seu primeiro infoproduto.
           </p>
           <p>
-            Em vez de entregar apenas aulas para assistir, a plataforma conduz
-            uma jornada guiada. Você responde, a inteligência interpreta, os
-            frameworks organizam e os materiais necessários para colocar a
-            oferta no ar são gerados com base no seu conhecimento.
+            Dentro da plataforma você percorre uma jornada guiada pela
+            metodologia da Rebeca Geller. A inteligência artificial analisa suas
+            respostas, organiza suas ideias e gera os materiais necessários para
+            que você avance de forma estruturada.
+          </p>
+          <p>
+            Você não fica perdido tentando descobrir o próximo passo. A
+            plataforma conduz você por cada etapa do processo.
           </p>
         </div>
         <div className="formula" aria-label="Fórmula editorial">
@@ -329,7 +346,7 @@ function IncludedSection() {
             <span>{String(index + 1).padStart(2, "0")}</span>
             <div>
               <h3>{item.title}</h3>
-              <p>{item.text}</p>
+              {item.text ? <p>{item.text}</p> : null}
             </div>
           </article>
         ))}
@@ -348,14 +365,17 @@ function BonusSection() {
       </div>
       <div>
         <p>
-          Os 10 primeiros participantes terão acesso a uma aula ao vivo com
-          Rebeca Geller sobre esteira de produtos, funil internacional e
-          expansão além das fronteiras.
+          Os primeiros participantes terão acesso a uma aula ao vivo com a
+          Rebeca Geller para mostrar como montar sua esteira de produto e seu
+          funil internacional para levar o que você criou além das fronteiras.
         </p>
         <p>
-          O encontro terá espaço para dúvidas ao vivo, será gravado e ficará
-          disponível na plataforma. É um encontro exclusivo para os primeiros
-          participantes que decidirem implementar agora.
+          Quem estiver ao vivo ainda terá a oportunidade de tirar dúvidas sobre
+          o seu próprio cenário.
+        </p>
+        <p>
+          Após a turma inicial, a gravação ficará disponível na plataforma, mas o
+          encontro ao vivo é exclusivo para os primeiros participantes.
         </p>
         <CtaLink>Quero garantir minha vaga entre os 10 primeiros</CtaLink>
       </div>
@@ -369,12 +389,10 @@ function PricingSection() {
       <div className="offer-copy">
         <p className="eyebrow">Sua oportunidade</p>
         <h2>EstratégIA — Plataforma de Implementação do seu Primeiro Infoproduto</h2>
-        <ul>
-          <li>4 meses de acesso completo</li>
-          <li>Metodologia de implementação</li>
-          <li>Entregáveis para página, criativos e conteúdo</li>
-          <li>Aulas de apoio para validação orgânica e tráfego pago</li>
-        </ul>
+        <p>
+          4 meses de acesso completo à plataforma EstratégIA, com toda a
+          metodologia, todos os entregáveis e as aulas de apoio.
+        </p>
       </div>
       <div className="price-panel">
         <p className="old-price">De: R$ 1.997,00</p>
@@ -398,9 +416,9 @@ function GuaranteeSection() {
         <p className="eyebrow">Garantia incondicional</p>
         <h2>7 dias de risco zero</h2>
         <p>
-          Você tem 7 dias para acessar a plataforma, conhecer a estrutura e
-          decidir com tranquilidade. Se entender que o EstratégIA não é para o
-          seu momento, basta solicitar o reembolso dentro do prazo.
+          Inscreva-se, acesse a plataforma e use as primeiras ferramentas. Se em
+          até 7 dias você avaliar que a metodologia não se adequa ao seu momento
+          profissional, basta solicitar o reembolso.
         </p>
         <p className="guarantee-highlight">
           <ShieldCheck aria-hidden="true" size={24} strokeWidth={1.5} />
@@ -457,12 +475,14 @@ function FinalCTA() {
       <h2>Você tem duas escolhas.</h2>
       <div className="choice-grid">
         <p>
-          Continuar com o conhecimento parado, dependendo da agenda e esperando
-          o momento perfeito para começar.
+          Continuar com o conhecimento parado, dependendo da agenda, vendo
+          outros especialistas com menos experiência que você faturando no
+          digital todo mês.
         </p>
         <p>
-          Acessar a metodologia, estruturar seu infoproduto e usar processo e
-          inteligência artificial para fazer o que precisa ser feito.
+          Ou acessar agora a metodologia que já estruturou mais de 200 funis e
+          finalmente colocar o seu infoproduto no ar com estrutura, com processo,
+          com a IA do seu lado.
         </p>
       </div>
       <p className="statement">Faça o que tem que ser feito.</p>
@@ -485,11 +505,7 @@ function Footer() {
         <a href="#contato">Contato</a>
         <a href="#legal">Informações legais</a>
       </nav>
-      <p>
-        © {new Date().getFullYear()} Expert Digital. Dados legais, contato,
-        CNPJ e links oficiais devem ser configurados no código antes da
-        publicação.
-      </p>
+      <p>© {new Date().getFullYear()} Expert Digital.</p>
     </footer>
   );
 }
