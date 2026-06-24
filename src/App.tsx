@@ -1,8 +1,7 @@
-import { ArrowUpRight, Menu, X, Play, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Check, Menu, X } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import {
   CHECKOUT_URL,
-  VSL_URL,
   assets,
   audience,
   exclusions,
@@ -14,9 +13,45 @@ import {
   philosophySteps,
 } from "./content";
 
-function CtaLink({ children, className = "" }: { children: string; className?: string }) {
+function useStaggerReveal(selector: string) {
+  useEffect(() => {
+    const items = Array.from(document.querySelectorAll<HTMLElement>(selector));
+    if (!items.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const item = entry.target as HTMLElement;
+          window.setTimeout(() => {
+            item.classList.add("is-visible");
+          }, Number(item.dataset.revealDelay || 0));
+          observer.unobserve(item);
+        });
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    items.forEach((item, index) => {
+      item.dataset.revealDelay = String(index * 110);
+      observer.observe(item);
+    });
+
+    return () => observer.disconnect();
+  }, [selector]);
+}
+
+function CtaLink({
+  children,
+  className = "",
+  href = "#oferta",
+}: {
+  children: string;
+  className?: string;
+  href?: string;
+}) {
   return (
-    <a className={`button ${className}`} href={CHECKOUT_URL}>
+    <a className={`button ${className}`} href={href}>
       <span>{children}</span>
       <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.6} />
     </a>
@@ -80,9 +115,8 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero-copy">
-        <p className="eyebrow">Plataforma de Implementação</p>
         <h1>
-          Seu primeiro infoproduto para vender em{" "}
+          Seu primeiro infoproduto pronto para vender em {" "}
           <em>60 dias ou menos</em>
         </h1>
         <p className="hero-subtitle">
@@ -114,45 +148,17 @@ function Hero() {
   );
 }
 
-function VslSection() {
-  return (
-    <section className="section dark vsl-section" id="metodo">
-      <div className="section-head narrow">
-        <p className="eyebrow">Conheça o método</p>
-        <h2>Veja como transformar seu conhecimento em um infoproduto estruturado</h2>
-      </div>
-      <div className="vsl-frame">
-        {VSL_URL ? (
-          <iframe
-            src={VSL_URL}
-            title="Vídeo de vendas EstratégIA"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
-          <div className="vsl-cover" aria-label="Capa do vídeo de vendas">
-            <button type="button" aria-label="Vídeo em breve">
-              <Play aria-hidden="true" fill="currentColor" />
-            </button>
-          </div>
-        )}
-      </div>
-      <CtaLink>Quero acessar agora</CtaLink>
-    </section>
-  );
-}
-
 function AudienceSection() {
+  useStaggerReveal("#para-quem .line-item");
+
   return (
     <section className="section light" id="para-quem">
-      <div className="split-head">
-        <p className="eyebrow">Para quem é</p>
+      <div className="split-head no-eyebrow">
         <h2>Este método é para você se...</h2>
       </div>
       <div className="editorial-grid five">
-        {audience.map((item, index) => (
+        {audience.map((item) => (
           <article className="line-item" key={item.title}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
           </article>
@@ -163,10 +169,11 @@ function AudienceSection() {
 }
 
 function ExclusionSection() {
+  useStaggerReveal(".exclusion .exclusion-list > p, .exclusion .button");
+
   return (
     <section className="section dark exclusion">
       <div>
-        <p className="eyebrow">Critério</p>
         <h2>Não é para você se...</h2>
       </div>
       <div className="exclusion-list">
@@ -193,8 +200,7 @@ function StorySection() {
         <span>Rebeca Geller</span>
       </div>
       <div className="story-copy">
-        <p className="eyebrow">A história por trás do método</p>
-        <h2>A trajetória de Rebeca Geller</h2>
+        <h2>A história por trás do método</h2>
         <p>
           Rebeca Geller trabalhou nos bastidores como Coprodutora de
           infoprodutos por 6 anos e liderou a estruturação de mais de 200 funis
@@ -243,10 +249,11 @@ function StorySection() {
 }
 
 function PhilosophySection() {
+  useStaggerReveal(".philosophy .philosophy-grid article");
+
   return (
     <section className="section light philosophy">
       <div className="section-head">
-        <p className="eyebrow">Filosofia</p>
         <h2>A filosofia: primeiro valide, depois escale</h2>
         <p>
           Um dos erros mais comuns de quem está entrando no mercado digital é
@@ -270,16 +277,14 @@ function PhilosophySection() {
           </article>
         ))}
       </div>
-      <p className="statement">Primeiro valide. Depois escale.</p>
     </section>
   );
 }
 
 function ProductSection() {
   return (
-    <section className="section product">
-      <div className="split-head">
-        <p className="eyebrow">Plataforma</p>
+    <section className="section product" id="metodo">
+      <div className="split-head no-eyebrow">
         <h2>O que é o EstratégIA?</h2>
       </div>
       <div className="product-grid">
@@ -314,18 +319,87 @@ function ProductSection() {
 }
 
 function JourneySection() {
+  useEffect(() => {
+    const section = document.querySelector<HTMLElement>("#jornada");
+    const steps = Array.from(document.querySelectorAll<HTMLElement>(".journey-step"));
+    const progress = document.querySelector<HTMLElement>(".journey-progress");
+
+    if (!section || !steps.length || !progress) return;
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const step = entry.target as HTMLElement;
+          window.setTimeout(() => {
+            step.classList.add("is-visible");
+          }, Number(step.dataset.delay || 0));
+          revealObserver.unobserve(step);
+        });
+      },
+      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    steps.forEach((step, index) => {
+      step.dataset.delay = String(index * 120);
+      revealObserver.observe(step);
+    });
+
+    const update = () => {
+      const sectionRect = section.getBoundingClientRect();
+      const viewportAnchor = window.innerHeight * 0.45;
+      const total = sectionRect.height - window.innerHeight * 0.6;
+      const raw = (viewportAnchor - sectionRect.top) / Math.max(total, 1);
+      const clamped = Math.min(1, Math.max(0, raw));
+      progress.style.setProperty("--journey-progress", `${clamped * 100}%`);
+
+      let activeIndex = 0;
+      steps.forEach((step, index) => {
+        const rect = step.getBoundingClientRect();
+        const distance = Math.abs(rect.top + rect.height * 0.35 - viewportAnchor);
+        const current = steps[activeIndex];
+        const currentRect = current.getBoundingClientRect();
+        const currentDistance = Math.abs(
+          currentRect.top + currentRect.height * 0.35 - viewportAnchor,
+        );
+        if (distance < currentDistance) activeIndex = index;
+      });
+
+      steps.forEach((step, index) => {
+        step.classList.toggle("is-active", index === activeIndex);
+        step.classList.toggle("is-complete", index < activeIndex);
+      });
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      revealObserver.disconnect();
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   return (
     <section className="section dark" id="jornada">
       <div className="section-head">
-        <p className="eyebrow">Jornada de quatro meses</p>
         <h2>Como funciona a jornada de 4 meses</h2>
       </div>
-      <div className="journey-list">
+      <div className="journey-map">
+        <div className="journey-progress" aria-hidden="true">
+          {journey.map((item, index) => (
+            <span key={item.title}>{String(index + 1).padStart(2, "0")}</span>
+          ))}
+        </div>
         {journey.map((item, index) => (
-          <article key={item.title}>
-            <span>Passo {String(index + 1).padStart(2, "0")}</span>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
+          <article className="journey-step" key={item.title}>
+            <div className="journey-node" aria-hidden="true" />
+            <div className="journey-card">
+              <span>Passo {String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
           </article>
         ))}
       </div>
@@ -334,9 +408,11 @@ function JourneySection() {
 }
 
 function IncludedSection() {
+  useStaggerReveal("#incluido .included-list article");
+
   return (
     <section className="section light" id="incluido">
-      <div className="split-head">
+      <div className="split-head included-head">
         <p className="eyebrow">Entregáveis</p>
         <h2>Tudo o que está incluído no seu acesso</h2>
       </div>
@@ -387,7 +463,6 @@ function PricingSection() {
   return (
     <section className="section offer" id="oferta">
       <div className="offer-copy">
-        <p className="eyebrow">Sua oportunidade</p>
         <h2>EstratégIA — Plataforma de Implementação do seu Primeiro Infoproduto</h2>
         <p>
           4 meses de acesso completo à plataforma EstratégIA, com toda a
@@ -397,8 +472,8 @@ function PricingSection() {
       <div className="price-panel">
         <p className="old-price">De: R$ 1.997,00</p>
         <p className="price">R$ 997,00</p>
-        <p>ou em até 12x no cartão</p>
-        <CtaLink>Quero acessar por R$ 997</CtaLink>
+        <p className="installments">ou em até 12x no cartão</p>
+        <CtaLink href={CHECKOUT_URL}>Quero acessar por R$ 997</CtaLink>
         <small>
           O valor retornará ao preço original de R$ 1.997,00 assim que a meta
           da turma de lançamento for atingida, sem aviso prévio.
@@ -411,7 +486,6 @@ function PricingSection() {
 function GuaranteeSection() {
   return (
     <section className="section guarantee">
-      <div className="guarantee-number">07</div>
       <div>
         <p className="eyebrow">Garantia incondicional</p>
         <h2>7 dias de risco zero</h2>
@@ -421,10 +495,10 @@ function GuaranteeSection() {
           profissional, basta solicitar o reembolso.
         </p>
         <p className="guarantee-highlight">
-          <ShieldCheck aria-hidden="true" size={24} strokeWidth={1.5} />
+          <Check aria-hidden="true" size={24} strokeWidth={1.7} />
           Devolvemos 100% do seu investimento de forma integral.
         </p>
-        <CtaLink>Quero garantir minha vaga agora</CtaLink>
+        <CtaLink href={CHECKOUT_URL}>Quero garantir minha vaga agora</CtaLink>
       </div>
     </section>
   );
@@ -471,23 +545,28 @@ function FAQSection() {
 function FinalCTA() {
   return (
     <section className="section dark final-cta">
-      <p className="eyebrow">Decisão</p>
       <h2>Você tem duas escolhas.</h2>
       <div className="choice-grid">
-        <p>
-          Continuar com o conhecimento parado, dependendo da agenda, vendo
-          outros especialistas com menos experiência que você faturando no
-          digital todo mês.
-        </p>
-        <p>
-          Ou acessar agora a metodologia que já estruturou mais de 200 funis e
-          finalmente colocar o seu infoproduto no ar com estrutura, com processo,
-          com a IA do seu lado.
-        </p>
+        <div className="choice-item is-negative">
+          <span aria-hidden="true">×</span>
+          <p>
+            Continuar com o conhecimento parado, dependendo da agenda, vendo
+            outros especialistas com menos experiência que você faturando no
+            digital todo mês.
+          </p>
+        </div>
+        <div className="choice-item is-positive">
+          <span aria-hidden="true">✓</span>
+          <p>
+            Ou acessar agora a metodologia que já estruturou mais de 200 funis e
+            finalmente colocar o seu infoproduto no ar com estrutura, com processo,
+            com a IA do seu lado.
+          </p>
+        </div>
       </div>
       <p className="statement">Faça o que tem que ser feito.</p>
       <p className="signature">Rebeca Geller</p>
-      <CtaLink>Quero acessar por R$ 997</CtaLink>
+      <CtaLink href={CHECKOUT_URL}>Quero acessar por R$ 997</CtaLink>
     </section>
   );
 }
@@ -516,16 +595,26 @@ function MobileStickyCTA() {
   useEffect(() => {
     const onScroll = () => {
       const hero = document.querySelector<HTMLElement>(".hero");
-      setVisible(Boolean(hero && window.scrollY > hero.offsetHeight - 80));
+      const offer = document.querySelector<HTMLElement>("#oferta");
+      const passedHero = Boolean(hero && window.scrollY > hero.offsetHeight - 80);
+      const beforeOffer = Boolean(
+        window.location.hash !== "#oferta" && (!offer || window.scrollY < offer.offsetTop - 140),
+      );
+      setVisible(passedHero && beforeOffer);
     };
     onScroll();
+    window.setTimeout(onScroll, 120);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("hashchange", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("hashchange", onScroll);
+    };
   }, []);
 
   return (
-    <a className={`mobile-sticky ${visible ? "is-visible" : ""}`} href={CHECKOUT_URL}>
-      Quero acessar por R$ 997
+    <a className={`mobile-sticky ${visible ? "is-visible" : ""}`} href="#oferta">
+      Quero garantir o desconto de lançamento
       <ArrowUpRight aria-hidden="true" size={16} />
     </a>
   );
@@ -537,7 +626,6 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <VslSection />
         <AudienceSection />
         <ExclusionSection />
         <StorySection />
