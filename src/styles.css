@@ -329,8 +329,7 @@ h2 em,
   backdrop-filter: blur(8px);
 }
 
-.metric-strip div,
-.story-metrics div {
+.metric-strip div {
   display: flex;
   align-items: baseline;
   gap: 14px;
@@ -339,13 +338,11 @@ h2 em,
   border-right: 1px solid var(--line-light);
 }
 
-.metric-strip div:last-child,
-.story-metrics div:last-child {
+.metric-strip div:last-child {
   border-right: 0;
 }
 
 .metric-strip strong,
-.story-metrics strong,
 .guarantee-number {
   font-family: var(--serif);
   font-size: clamp(40px, 4.2vw, 68px);
@@ -353,8 +350,7 @@ h2 em,
   line-height: 0.9;
 }
 
-.metric-strip span,
-.story-metrics span {
+.metric-strip span {
   font-family: var(--mono);
   font-size: 11px;
   text-transform: uppercase;
@@ -455,7 +451,7 @@ h2 em,
 .line-item,
 .exclusion-list p,
 .exclusion-list .button,
-.philosophy-grid article,
+.philosophy-list li,
 .included-list article {
   opacity: 0;
   transform: translateY(28px);
@@ -472,7 +468,7 @@ h2 em,
 .line-item.is-visible,
 .exclusion-list p.is-visible,
 .exclusion-list .button.is-visible,
-.philosophy-grid article.is-visible,
+.philosophy-list li.is-visible,
 .included-list article.is-visible {
   opacity: 1;
   transform: translateY(0);
@@ -626,58 +622,44 @@ blockquote {
   line-height: 1;
 }
 
-.story-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 44px;
-  border-top: 1px solid var(--line-dark);
-  border-bottom: 1px solid var(--line-dark);
+.philosophy-list li {
+  position: relative;
+  padding-left: 28px;
 }
 
-.story-metrics div {
-  min-height: 110px;
-  padding: 18px 20px;
-  border-right-color: var(--line-dark);
-  flex-direction: column;
-  gap: 8px;
+.philosophy-list li::before {
+  position: absolute;
+  top: 0.68em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  content: "";
+  background: var(--terracotta);
+  border-radius: 999px;
 }
 
 .philosophy .section-head p {
   max-width: 760px;
 }
 
-.philosophy-grid {
+.philosophy-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 1180px;
+  gap: 20px;
+  max-width: 760px;
   margin: 0 auto 56px;
-  border-top: 1px solid var(--line-dark);
-  border-bottom: 1px solid var(--line-dark);
+  padding: 0;
+  list-style: none;
 }
 
-.philosophy-grid article {
-  min-height: 260px;
-  padding: 26px;
-  border-right: 1px solid var(--line-dark);
+.philosophy-list li {
+  color: rgba(53, 34, 28, 0.76);
+  font-size: clamp(20px, 2vw, 30px);
+  line-height: 1.35;
 }
 
-.philosophy-grid article:hover {
-  background: rgba(182, 95, 69, 0.055);
-  border-color: rgba(182, 95, 69, 0.32);
-  transform: translateY(-6px);
-}
-
-.philosophy-grid article:last-child {
-  border-right: 0;
-}
-
-.philosophy-grid span {
-  display: block;
-  margin-bottom: 70px;
-  color: var(--terracotta);
-  font-family: var(--serif);
-  font-size: clamp(52px, 6vw, 92px);
-  line-height: 0.8;
+.philosophy-list li:hover {
+  color: var(--brown-900);
+  transform: translateX(8px);
 }
 
 .statement {
@@ -1270,14 +1252,6 @@ blockquote {
     min-height: 620px;
   }
 
-  .philosophy-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .philosophy-grid article:nth-child(2n) {
-    border-right: 0;
-  }
-
   .product-grid .formula,
   .bonus > div:last-child,
   .price-panel {
@@ -1364,8 +1338,8 @@ blockquote {
     padding: 24px 0;
   }
 
-  .philosophy-grid article {
-    padding: 24px 0;
+  .philosophy-list {
+    margin-bottom: 34px;
   }
 
   .journey-map {
@@ -1422,30 +1396,21 @@ blockquote {
     margin-bottom: 22px;
   }
 
-  .metric-strip,
-  .story-metrics {
+  .metric-strip {
     grid-template-columns: 1fr;
   }
 
-  .metric-strip div,
-  .story-metrics div {
+  .metric-strip div {
     border-right: 0;
     border-bottom: 1px solid var(--line-light);
   }
 
-  .story-metrics div {
-    border-bottom-color: var(--line-dark);
-  }
-
-  .editorial-grid.five,
-  .philosophy-grid {
+  .editorial-grid.five {
     grid-template-columns: 1fr;
   }
 
   .line-item,
-  .line-item:nth-child(2n),
-  .philosophy-grid article,
-  .philosophy-grid article:nth-child(2n) {
+  .line-item:nth-child(2n) {
     min-height: auto;
     border-right: 0;
   }
@@ -1547,7 +1512,7 @@ blockquote {
   .line-item,
   .exclusion-list p,
   .exclusion-list .button,
-  .philosophy-grid article,
+  .philosophy-list li,
   .included-list article {
     opacity: 1;
     transform: none;

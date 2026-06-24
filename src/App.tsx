@@ -246,21 +246,13 @@ function StorySection() {
           Rebeca, programado para extrair a sua expertise, organizar as suas
           ideias e estruturar o seu primeiro infoproduto.
         </p>
-        <div className="story-metrics">
-          {metrics.map((item) => (
-            <div key={item.label}>
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
 }
 
 function PhilosophySection() {
-  useStaggerReveal(".philosophy .philosophy-grid article");
+  useStaggerReveal(".philosophy .philosophy-list li");
 
   return (
     <section className="section light philosophy">
@@ -280,14 +272,11 @@ function PhilosophySection() {
           fase de validação com segurança e velocidade.
         </p>
       </div>
-      <div className="philosophy-grid">
-        {philosophySteps.map((step, index) => (
-          <article key={step}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <p>{step}</p>
-          </article>
+      <ul className="philosophy-list">
+        {philosophySteps.map((step) => (
+          <li key={step}>{step}</li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
@@ -583,7 +572,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div>
-        <strong>Expert Digital</strong>
+        <strong>EstratégIA</strong>
         <span>Plataforma de Implementação — Rebeca Geller</span>
       </div>
       <nav aria-label="Links legais">
@@ -592,7 +581,7 @@ function Footer() {
         <a href="#contato">Contato</a>
         <a href="#legal">Informações legais</a>
       </nav>
-      <p>© {new Date().getFullYear()} Expert Digital.</p>
+      <p>© {new Date().getFullYear()} EstratégIA.</p>
     </footer>
   );
 }
