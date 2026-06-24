@@ -191,12 +191,23 @@ function StorySection() {
     <section className="section story" id="historia">
       <div className="story-media">
         <img
-          src={assets.rebecaTrajetoria}
-          alt="Retrato de Rebeca Geller em blazer escuro"
+          className="story-bg"
+          src={assets.rebecaStoryBg}
+          alt=""
           width="1290"
           height="2293"
           loading="lazy"
+          aria-hidden="true"
         />
+        <figure className="story-frame">
+          <img
+            src={assets.rebecaTrajetoria}
+            alt="Retrato de Rebeca Geller em blazer escuro"
+            width="1290"
+            height="2293"
+            loading="lazy"
+          />
+        </figure>
         <span>Rebeca Geller</span>
       </div>
       <div className="story-copy">
@@ -412,8 +423,7 @@ function IncludedSection() {
 
   return (
     <section className="section light" id="incluido">
-      <div className="split-head included-head">
-        <p className="eyebrow">Entregáveis</p>
+      <div className="split-head included-head no-eyebrow">
         <h2>Tudo o que está incluído no seu acesso</h2>
       </div>
       <div className="included-list">
@@ -436,7 +446,6 @@ function BonusSection() {
   return (
     <section className="section dark bonus">
       <div>
-        <p className="eyebrow accent">Bônus exclusivo</p>
         <h2>Bônus exclusivo <em>apenas para os 10 primeiros</em></h2>
       </div>
       <div>
@@ -529,8 +538,7 @@ function FaqItem({ item, index }: { item: (typeof faq)[number]; index: number })
 function FAQSection() {
   return (
     <section className="section faq" id="faq">
-      <div className="split-head">
-        <p className="eyebrow">FAQ</p>
+      <div className="split-head no-eyebrow">
         <h2>Perguntas frequentes</h2>
       </div>
       <div className="faq-list">

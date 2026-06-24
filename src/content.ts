@@ -1,4 +1,5 @@
 import rebecaHero from "./assets/rebeca-hero.jpg";
+import rebecaStoryBg from "./assets/rebeca-story-bg.jpg";
 import rebecaTrajetoria from "./assets/rebeca-trajetoria.jpg";
 
 export const CHECKOUT_URL = "https://payfast.greenn.com.br/redirect/295168";
@@ -6,6 +7,7 @@ export const VSL_URL = "";
 
 export const assets = {
   rebecaHero,
+  rebecaStoryBg,
   rebecaTrajetoria,
 };
 
@@ -104,10 +106,6 @@ export const included = [
   {
     title: "Aulas estratégicas de apoio.",
     text: "Conteúdo direto e objetivo sobre implementação, validação orgânica e tráfego pago para você avançar com segurança em cada fase.",
-  },
-  {
-    title: "Suporte técnico por e-mail.",
-    text: "",
   },
 ];
 
