@@ -154,7 +154,7 @@ function AudienceSection() {
   return (
     <section className="section light" id="para-quem">
       <div className="split-head no-eyebrow">
-        <h2>Este método é para você se...</h2>
+        <h2>Este método é para você que...</h2>
       </div>
       <div className="editorial-grid five">
         {audience.map((item) => (
@@ -174,7 +174,7 @@ function ExclusionSection() {
   return (
     <section className="section dark exclusion">
       <div>
-        <h2>Não é para você se...</h2>
+        <h2>Não é para você que...</h2>
       </div>
       <div className="exclusion-list">
         {exclusions.map((item) => (
@@ -469,7 +469,7 @@ function PricingSection() {
       <div className="price-panel">
         <p className="old-price">De: R$ 1.997,00</p>
         <p className="price">R$ 997,00</p>
-        <p className="installments">ou em até 12x no cartão</p>
+        <p className="installments">ou em até 12x de R$ 102,51</p>
         <CtaLink href={CHECKOUT_URL}>Quero acessar por R$ 997</CtaLink>
         <small>
           O valor retornará ao preço original de R$ 1.997,00 assim que a meta
