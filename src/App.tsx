@@ -468,9 +468,9 @@ function PricingSection() {
       </div>
       <div className="price-panel">
         <p className="old-price">De: R$ 1.997,00</p>
-        <p className="price">R$ 997,00</p>
-        <p className="installments">ou em até 12x de R$ 102,51</p>
-        <CtaLink href={CHECKOUT_URL}>Quero acessar por R$ 997</CtaLink>
+        <p className="price">R$ 1.297,00</p>
+        <p className="installments">ou em até 12x de R$ 133,35</p>
+        <CtaLink href={CHECKOUT_URL}>Quero acessar por R$ 1.297</CtaLink>
         <small>
           O valor retornará ao preço original de R$ 1.997,00 assim que a meta
           da turma de lançamento for atingida, sem aviso prévio.
@@ -562,7 +562,7 @@ function FinalCTA() {
       </div>
       <p className="statement">Faça o que tem que ser feito.</p>
       <p className="signature">Rebeca Geller</p>
-      <CtaLink href={CHECKOUT_URL}>Quero acessar por R$ 997</CtaLink>
+      <CtaLink href={CHECKOUT_URL}>Quero acessar por R$ 1.297</CtaLink>
     </section>
   );
 }
