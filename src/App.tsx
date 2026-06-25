@@ -572,7 +572,7 @@ function Footer() {
     <footer className="footer">
       <div>
         <strong>EstratégIA</strong>
-        <span>Plataforma de Implementação — Rebeca Geller</span>
+        <span>Plataforma de Implementação</span>
       </div>
       <nav aria-label="Links legais">
         <a href="#privacidade">Política de Privacidade</a>
