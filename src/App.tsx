@@ -50,8 +50,10 @@ function CtaLink({
   className?: string;
   href?: string;
 }) {
+  const isExternal = /^https?:\/\//.test(href);
+
   return (
-    <a className={`button ${className}`} href={href}>
+    <a className={`button ${className}`} href={href} target={isExternal ? "_top" : undefined}>
       <span>{children}</span>
       <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.6} />
     </a>
