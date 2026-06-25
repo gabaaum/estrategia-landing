@@ -2,7 +2,8 @@ import rebecaHero from "./assets/rebeca-hero.jpg";
 import rebecaStoryBg from "./assets/rebeca-story-bg.jpg";
 import rebecaTrajetoria from "./assets/rebeca-trajetoria.jpg";
 
-export const CHECKOUT_URL = "https://payfast.greenn.com.br/redirect/295168";
+export const CHECKOUT_URL =
+  "https://payfast.greenn.com.br/6q5htkq/offer/FffYll?ch_id=140444";
 export const VSL_URL = "";
 
 export const assets = {
